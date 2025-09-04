@@ -1,22 +1,43 @@
 from itertools import product
-from runners.base_runner import ExperimentRunner
-from configs import ExperimentConfig, HLS4MLConfig
+from configs import default_experiment
+from helpers import set_nested_attr
+from dataclasses import replace
+from copy import deepcopy
 
-granularities = ["name", "model"]
-reuse_factors = [1, 2]
-default_precision = ["fixed<16,6>", "fixed<8,2>"]
+sweep_index = 0
 
-def sweep():
-    runner = ExperimentRunner()
+def sweep(marked_parameters, global_parameters):
+    global sweep_index
 
-    for r, p in product(reuse_factors, default_precision):
-        cfg = ExperimentConfig(
-            hls4ml_config=HLS4MLConfig(
-                    granularity='model',
-                    backend='Vitis',
-                    default_precision = p,
-                    default_reuse_factor = r,
-                    max_precision='None'
-            ),
-        )
-        runner.run(cfg)
+    # Extract sweep keys and value lists
+    sweep_keys = list(marked_parameters.keys())
+    sweep_values = list(marked_parameters.values())
+
+# Generate all combinations (Cartesian product)
+    combinations = product(*sweep_values)
+    experiments = []
+
+    for values in combinations:
+        # Start with default experiment
+        # Deep copy so nested dataclasses (like global_parameters) are fresh
+        experiment = deepcopy(default_experiment)
+
+        # Set each marked parameter to the corresponding value in this combination
+        for key, value in zip(sweep_keys, values):
+            # Remove 'hls4ml_config.' prefix if present for direct attributes
+            experiment = set_nested_attr(experiment, key, value)
+        # Update experiment project name and output dir by index 
+        gp = deepcopy(global_parameters)
+        experiment_name = f"{gp.project_name}_{sweep_index+1}"
+        output_dir_name = f"{gp.ml2hls_project_dir}/{gp.output_dir}_{sweep_index+1}"
+        gp = replace(gp, project_name=experiment_name, output_dir=output_dir_name)
+        # Set project global parameters
+        experiment = replace(experiment, global_parameters=gp)
+
+        print(f"Final experiment: {experiment.global_parameters.project_name}")
+        # Append the configured experiment to the list
+        experiments.append(experiment)
+        sweep_index += 1
+
+    print(f"Generated {len(experiments)} experiments.")
+    return experiments
