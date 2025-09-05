@@ -24,3 +24,14 @@ Each experiment produces an HLS4ML project, which is synthesized to FPGA RTL via
 ### 5. Model Quantization <- TODO
 ### 6. HLS4ML Config & Converter
 
+## Installation Instructions:
+conda create -n ml2hls_env -python=3.10.2 # or later
+conda activate ml2hls_env
+pip install < "requirements.txt"
+
+### Usage example:
+#### This test sets Vitis as the default backend and runs all combinations of fixed<4,1>, fixed<6,2> and reuse factor 8 and 16. The project name and output directory are then set to hello_world.
+
+conda activate ml2hls_env
+python main.py < example
+
