@@ -20,17 +20,6 @@ from helpers import parse_input, set_nested_attr
 #     batch_size: int
 #     optimizer: str
 
-@dataclass(frozen=True)
-class GlobalParameters:
-    output_dir: Optional[str] = "project"
-    project_name : Optional[str] = "project"
-    ml2hls_project_dir: Optional[str] = "ml2hls_project"
-    input_data_tb: Optional[str] = None
-    output_data_tb: Optional[str] = None
-
-@dataclass(frozen=True)
-class ModelConfig:
-    path: str = 'model.h5' # Path to the model                  
 
 @dataclass(frozen=True)
 class DatasetConfig:
