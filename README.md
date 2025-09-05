@@ -6,7 +6,7 @@ A user might be interested in examining the model accuracy of an FPGA inferred C
 
 In the example quantizing is expected to reduce BRAM usage on an FPGA, with an accuracy penalty. Similarly, reducing input shapes reduces not only BRAM usage, but also DSP, FF and LUT usage, at the price of an additional accuracy loss.
 
-ML2HLS builds an HLS4ML project for each one of the four pairs:
+ML2HLS builds an HLS4ML project for each one of the four pairs:  
 precision `fixed<8,2>` — input shape `(16, 16)`  
 precision `fixed<8,2>` — input shape `(32, 32)`  
 precision `fixed<16,2>` — input shape `(16, 16)`  
