@@ -34,7 +34,6 @@ def sweep(marked_parameters, global_parameters):
         # Set project global parameters
         experiment = replace(experiment, global_parameters=gp)
 
-        print(f"Final experiment: {experiment.global_parameters.project_name}")
         # Append the configured experiment to the list
         experiments.append(experiment)
         sweep_index += 1

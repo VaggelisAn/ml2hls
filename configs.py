@@ -163,12 +163,11 @@ def parametrize_hls4ml_config(marked_parameters):
             continue
     return 
 
-def run_experiments(experiments):
-    experiment_index = 1
-
+def run_experiments(experiments, build=False, compile=False):
+    experiment_index = 0
     # TODO: change to support model configs
     for experiment in experiments:
-        print("\n\n- - - Running Experiment {}/{}: {} - - -\n".format(experiment_index, len(experiments), experiment.global_parameters.project_name))
+        print("\n\n- - - Running Experiment {}/{}: {} - - -\n".format(experiment_index+1, len(experiments), experiment.global_parameters.project_name))
     #   - - - Model - - -
         try:
             model = load_model(experiment.model_config.path)
@@ -186,8 +185,13 @@ def run_experiments(experiments):
 
             hls_config = hls4ml.utils.config_from_keras_model(model=model, **config_kwargs)
             hls_model = hls4ml.converters.convert_from_keras_model(model=model, hls_config=hls_config, **converter_kwargs)
-            # hls_model.compile()   
-            hls_model.build()
+            
+            if (compile):
+                print("Compiling...")
+                hls_model.compile()   
+            if (build):
+                print("Building...")
+                hls_model.build()
     
         except Exception as e:
             print(f"Error in project '{experiment.global_parameters.project_name}':")

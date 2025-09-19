@@ -40,10 +40,12 @@ def main():
             continue
         elif user_input in ["hls4ml_config", "hc"]:
             parametrize_hls4ml_config(marked_parameters)
+            print(marked_parameters)
         elif user_input in ["hls4ml_converter", "hcv"]:
             parametrize_hls4ml_converter(marked_parameters)
         elif user_input in ["global_config", "gc"]:
             global_parameters = global_config()
+            print(global_parameters)
         elif user_input in ["sweep", "s"]:
             experiments = sweep(marked_parameters, global_parameters)
         elif user_input in ["print_marked", "pm"]:

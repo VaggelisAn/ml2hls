@@ -1,6 +1,7 @@
 ## What is ML2HLS?
-ML2HLS is a tool for determining the optimal parameters for FPGA deployment of neural networks. ML2HLS is based on the HLS4ML framework.
+**ML2HLS is a tool for determining the optimal parameters for FPGA deployment of neural networks. ML2HLS is based on the HLS4ML framework.**
 
+<<<<<<< HEAD
 ### What is ML2HLS, with an example?
 <<<<<<< HEAD
 A user might be interested in examining the model accuracy of an FPGA inferred CNN under the precision modes `fixed<8,2>`, `fixed<16,2>`, while at the same time exploring different input shapes `(16, 16)` and `(32, 32)` for the CNN. 
@@ -13,16 +14,27 @@ precision `fixed<8,2>` — input shape `(32, 32)`
 precision `fixed<16,2>` — input shape `(16, 16)`  
 precision `fixed<16,2>` — input shape `(32, 32)`  
 =======
+=======
+## What is ML2HLS, with an example?
+>>>>>>> 6dc6e28 (Added GUI)
 A user might be interested in examining the model accuracy of an FPGA inferred CNN under the precision modes fixed<8,2>, fixed<16,2>, while at the same time exploring different input shapes (16, 16) and (32, 32) for the CNN. 
 
 In the example quantizing is expected to reduce BRAM usage on an FPGA, with an accuracy penalty. Similarly, reducing input shapes reduces not only BRAM usage, but also DSP, FF and LUT usage, at the price of an additional accuracy loss.
 
+<<<<<<< HEAD
 ML2HLS builds an HLS4ML project for each one of the four pairs:
 precision fixed<8,2> - input shape (16, 16)
 precision fixed<8,2> - input shape (32, 32)
 precision fixed<16,2> - input shape (16, 16)
 precision fixed<16,2> - input shape (32, 32)
 >>>>>>> 977d29d (Added usage example and instructions)
+=======
+ML2HLS builds an HLS4ML project for each one of the four pairs:  
+precision fixed<8,2> - input shape (16, 16)  
+precision fixed<8,2> - input shape (32, 32)  
+precision fixed<16,2> - input shape (16, 16)  
+precision fixed<16,2> - input shape (32, 32)  
+>>>>>>> 6dc6e28 (Added GUI)
 
 This allows us to precisely examine all the advantages and disadvantages of using each pair, and based on our specifications decide on the optimal.
 
@@ -36,6 +48,7 @@ Each experiment produces an HLS4ML project, which is synthesized to FPGA RTL via
 ### 5. Model Quantization <- TODO
 ### 6. HLS4ML Config & Converter
 
+<<<<<<< HEAD
 ## Installation Instructions:
 <<<<<<< HEAD
 `conda create -n ml2hls_env -python=3.10.2 # or later`  
@@ -50,11 +63,28 @@ This test sets Vitis as the default backend and runs all combinations of `fixed<
 conda create -n ml2hls_env -python=3.10.2 # or later
 conda activate ml2hls_env
 pip install < "requirements.txt"
+=======
+## Virtual Environment Setup:
+`conda create -n ml2hls_env -python=3.10.2 # or later`  
+`conda activate ml2hls_env`  
+`pip install < "requirements.txt"`  
+>>>>>>> 6dc6e28 (Added GUI)
 
-### Usage example:
-#### This test sets Vitis as the default backend and runs all combinations of fixed<4,1>, fixed<6,2> and reuse factor 8 and 16. The project name and output directory are then set to hello_world.
+## How to use:
+### **Terminal**
 
+<<<<<<< HEAD
 conda activate ml2hls_env
 python main.py < example
 >>>>>>> 977d29d (Added usage example and instructions)
+=======
+`conda activate ml2hls_env`  
+`python main.py < example`
+>>>>>>> 6dc6e28 (Added GUI)
 
+This example sets Vitis as the default backend and runs all combinations of fixed<4,1>, fixed<6,2> and reuse factor 8 and 16. The project name and output directory are set to hello_world.
+
+
+### **GUI**
+`conda activate ml2hls_env`  
+`streamlit run app.py`
