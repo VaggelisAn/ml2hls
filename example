@@ -1,0 +1,14 @@
+hls4ml_config
+backend Vitis
+default_precision fixed<4,1> fixed<6,2>
+default_reuse_factor 8 16
+r
+hls4ml_converter Vitis
+global_config
+project_name hello_world
+output_dir hello_world
+r
+s
+pe
+run
+q
