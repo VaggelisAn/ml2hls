@@ -162,7 +162,7 @@ def parametrize_hls4ml_config(marked_parameters):
             print(f"Syntax: [hls4ml_config argument]: value1 value2 value3 ...\neg. default_reuse_factor 1 2 4 8")
             continue
     return 
-
+    
 def run_experiments(experiments, build=False, compile=False):
     experiment_index = 0
     # TODO: change to support model configs
